@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+backend/.venv-codex/
+backend/venv/
+
+# Local databases and logs
+*.db
+*.sqlite
+*.sqlite3
+*.log
+backend/backend-server*.log
+
+# Node / frontend
+node_modules/
+dist/
+.vite/
+frontend/dist/
+frontend/.npm-cache/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Local session previews and generated quotes
+admin-session.png
+user-session.png
+generated/quote_request_*.pdf
+generated/watermark_tmp.png
+
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

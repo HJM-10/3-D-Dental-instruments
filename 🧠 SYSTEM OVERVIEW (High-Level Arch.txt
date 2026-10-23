@@ -1,0 +1,213 @@
+🧠 SYSTEM OVERVIEW (High-Level Architecture)
+🖥️ Frontend (React JS)
+
+Think of this as the stage where actors perform.
+
+Core Layers:
+
+Pages (routes)
+Components (reusable UI)
+Services (API calls)
+State (global + local)
+⚙️ Backend (FastAPI + SQLAlchemy)
+
+This is the brain and nervous system.
+
+Core Layers:
+
+Routes (API endpoints)
+Services (business logic)
+Models (DB schema)
+Schemas (validation)
+Auth (JWT + roles)
+🗄️ Database (PostgreSQL)
+
+Your memory vault.
+
+☁️ Storage
+VPS storage for images/uploads (initially)
+
+Structured folder:
+
+/uploads/products/
+/uploads/users/
+🧩 DATABASE STRUCTURE (Clean + Scalable)
+👤 Users
+id
+name
+email
+password (hashed)
+role (admin/user)
+profile_image
+created_at
+📦 Categories
+id
+name
+description
+🛍️ Products
+id
+name
+description
+base_price
+category_id
+configurable (boolean)
+created_at
+🔧 ProductConfigurations
+
+(dynamic fields defined by admin)
+
+id
+product_id
+field_name (e.g., size, color)
+field_type (text, dropdown, number)
+options (JSON)
+🛒 Cart
+id
+user_id
+🛒 CartItems
+id
+cart_id
+product_id
+quantity
+configuration (JSON)
+📦 Orders
+id
+user_id
+total_price
+status (pending, confirmed, shipped, delivered)
+shipping_id
+created_at
+📦 OrderItems
+id
+order_id
+product_id
+quantity
+configuration (JSON)
+📊 Analytics (Event Tracking)
+id
+user_id
+event_type (view, click, add_to_cart)
+product_id
+timestamp
+🌐 API STRUCTURE (FastAPI)
+🔐 Auth
+POST /auth/signup
+POST /auth/login
+GET /auth/me
+👤 Users (Admin)
+GET /users
+PUT /users/{id}
+DELETE /users/{id}
+📂 Categories
+GET /categories
+POST /categories (admin)
+PUT /categories/{id}
+DELETE /categories/{id}
+📦 Products
+GET /products
+GET /products/{id}
+POST /products (admin)
+PUT /products/{id}
+DELETE /products/{id}
+🔧 Product Config
+POST /products/{id}/config
+GET /products/{id}/config
+🛒 Cart
+GET /cart
+POST /cart/add
+DELETE /cart/remove
+📦 Orders
+POST /orders/create
+GET /orders
+PUT /orders/{id}/status
+📊 Analytics
+GET /analytics/overview
+GET /analytics/top-products
+GET /analytics/user-activity
+📱 FRONTEND STRUCTURE (React)
+📁 Folder Layout
+src/
+ ├── pages/
+ ├── components/
+ ├── services/
+ ├── context/
+ ├── hooks/
+ ├── routes/
+ └── assets/
+📄 PAGE-BY-PAGE FLOW
+🔐 Login / Signup
+Email + password
+JWT stored securely
+Redirect based on role
+🏠 Dashboard
+Admin:
+Sales overview (cards)
+Recent orders
+Top products
+User:
+Recent orders
+Suggested products
+📂 Categories
+List categories
+Click → products inside
+📦 Products (inside categories)
+Product cards
+Dynamic fields (configurable products)
+Add to cart
+🎨 Customize Page
+
+For now:
+
+“🚧 Coming Soon: 3D Product Customization”
+
+Future-ready placeholder only.
+
+🛒 Cart
+List items
+Show configurations
+Checkout button
+📦 Orders
+User:
+Order list
+Status tracking
+Shipping tracking (API later)
+Admin:
+Order management
+Confirm orders
+Add shipping ID
+📊 Analytics (Admin Only)
+Charts:
+Sales
+Top products
+User interactions
+⚙️ Settings
+Edit profile
+Change password
+Upload profile image
+🔁 ORDER FLOW (Important)
+User places order
+Backend:
+Saves order (pending)
+Sends:
+📧 Email to admin
+📱 WhatsApp notification (via API like Twilio or WhatsApp Business)
+Admin:
+Confirms manually
+
+Order moves:
+
+pending → confirmed → shipped → delivered
+Shipping:
+Tracking ID added
+Courier API integrated later
+🔐 SECURITY DESIGN
+JWT Authentication
+Role-based access (admin/user)
+Password hashing (bcrypt)
+.env for secrets:
+DB URL
+JWT secret
+Email credentials
+Input validation (Pydantic)
+File upload restrictions
+CORS protection

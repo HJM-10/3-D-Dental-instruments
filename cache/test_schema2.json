@@ -1,0 +1,996 @@
+{
+  "inputs": [
+    {
+      "id": "Cube::GeometryNodes::Socket_6",
+      "name": "Total Height",
+      "type": "float",
+      "default": 0.5,
+      "object": "Cube",
+      "modifier": "GeometryNodes",
+      "hidden": false,
+      "minimum": -10000.0,
+      "maximum": 10000.0
+    },
+    {
+      "id": "Cube::GeometryNodes::Socket_2",
+      "name": "Base Diameter",
+      "type": "float",
+      "default": 1.0,
+      "object": "Cube",
+      "modifier": "GeometryNodes",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cube::GeometryNodes::Socket_4",
+      "name": "Spiral Diameter",
+      "type": "float",
+      "default": 1.0,
+      "object": "Cube",
+      "modifier": "GeometryNodes",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cube::GeometryNodes::Socket_5",
+      "name": "Spiral Height",
+      "type": "float",
+      "default": 2.0,
+      "object": "Cube",
+      "modifier": "GeometryNodes",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cube::GeometryNodes::Socket_8",
+      "name": "Rotations",
+      "type": "float",
+      "default": 0.5,
+      "object": "Cube",
+      "modifier": "GeometryNodes",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cube::GeometryNodes::Socket_9",
+      "name": "Resolution",
+      "type": "integer",
+      "default": 256,
+      "object": "Cube",
+      "modifier": "GeometryNodes",
+      "hidden": false,
+      "minimum": 1,
+      "maximum": 1024
+    },
+    {
+      "id": "Cube::GeometryNodes::Socket_10",
+      "name": "Point Ratio",
+      "type": "float",
+      "default": 1.3000000715255737,
+      "object": "Cube",
+      "modifier": "GeometryNodes",
+      "hidden": false,
+      "minimum": -10000.0,
+      "maximum": 10000.0
+    },
+    {
+      "id": "Cylinder::Smooth by Angle::Input_1",
+      "name": "Angle",
+      "type": "float",
+      "default": 0.5235987901687622,
+      "object": "Cylinder",
+      "modifier": "Smooth by Angle",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 3.1415927410125732
+    },
+    {
+      "id": "Cylinder::Smooth by Angle::Socket_1",
+      "name": "Ignore Sharpness",
+      "type": "boolean",
+      "default": false,
+      "object": "Cylinder",
+      "modifier": "Smooth by Angle",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.001::Smooth by Angle::Input_1",
+      "name": "Angle",
+      "type": "float",
+      "default": 0.5235987901687622,
+      "object": "Cylinder.001",
+      "modifier": "Smooth by Angle",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 3.1415927410125732
+    },
+    {
+      "id": "Cylinder.001::Smooth by Angle::Socket_1",
+      "name": "Ignore Sharpness",
+      "type": "boolean",
+      "default": false,
+      "object": "Cylinder.001",
+      "modifier": "Smooth by Angle",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.002::Array::Socket_5",
+      "name": "Count",
+      "type": "integer",
+      "default": 3,
+      "object": "Cylinder.002",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": 1,
+      "maximum": 10000
+    },
+    {
+      "id": "Cylinder.002::Array::Socket_34",
+      "name": "Distance",
+      "type": "float",
+      "default": 1.0,
+      "object": "Cylinder.002",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": 0.009999999776482582,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cylinder.002::Array::Socket_37",
+      "name": "Angular Distance",
+      "type": "float",
+      "default": 0.7853981852531433,
+      "object": "Cylinder.002",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": 0.01745329238474369,
+      "maximum": 6.2831854820251465
+    },
+    {
+      "id": "Cylinder.002::Array::Socket_35",
+      "name": "Per Curve",
+      "type": "boolean",
+      "default": true,
+      "object": "Cylinder.002",
+      "modifier": "Array",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.002::Array::Socket_8",
+      "name": "Translation",
+      "type": "vector",
+      "default": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "object": "Cylinder.002",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": -3.4028234663852886e+38,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cylinder.002::Array::Socket_21",
+      "name": "Offset",
+      "type": "vector",
+      "default": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "object": "Cylinder.002",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": -3.4028234663852886e+38,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cylinder.002::Array::Socket_10",
+      "name": "Scale",
+      "type": "vector",
+      "default": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "object": "Cylinder.002",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": -3.4028234663852886e+38,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cylinder.002::Array::Socket_28",
+      "name": "Sweep Angle",
+      "type": "float",
+      "default": 3.1415927410125732,
+      "object": "Cylinder.002",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 6.2831854820251465
+    },
+    {
+      "id": "Cylinder.002::Array::Socket_6",
+      "name": "Radius",
+      "type": "float",
+      "default": 0.0,
+      "object": "Cylinder.002",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cylinder.002::Array::Socket_26",
+      "name": "Relative Space",
+      "type": "boolean",
+      "default": true,
+      "object": "Cylinder.002",
+      "modifier": "Array",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.002::Array::Socket_38",
+      "name": "Realize Instances",
+      "type": "boolean",
+      "default": true,
+      "object": "Cylinder.002",
+      "modifier": "Array",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.002::Array::Socket_12",
+      "name": "Align Rotation",
+      "type": "boolean",
+      "default": true,
+      "object": "Cylinder.002",
+      "modifier": "Array",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.002::Array::Socket_17",
+      "name": "Randomize",
+      "type": "boolean",
+      "default": false,
+      "object": "Cylinder.002",
+      "modifier": "Array",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.002::Array::Socket_42",
+      "name": "Randomize Offset",
+      "type": "vector",
+      "default": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "object": "Cylinder.002",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": -10000.0,
+      "maximum": 10000.0
+    },
+    {
+      "id": "Cylinder.002::Array::Socket_15",
+      "name": "Randomize Rotation",
+      "type": "vector",
+      "default": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "object": "Cylinder.002",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": -3.4028234663852886e+38,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cylinder.002::Array::Socket_19",
+      "name": "Randomize Scale",
+      "type": "vector",
+      "default": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "object": "Cylinder.002",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    {
+      "id": "Cylinder.002::Array::Socket_44",
+      "name": "Randomize Scale",
+      "type": "float",
+      "default": 0.0,
+      "object": "Cylinder.002",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    {
+      "id": "Cylinder.002::Array::Socket_45",
+      "name": "Randomize Flipping",
+      "type": "vector",
+      "default": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "object": "Cylinder.002",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    {
+      "id": "Cylinder.002::Array::Socket_22",
+      "name": "Exclude First",
+      "type": "boolean",
+      "default": true,
+      "object": "Cylinder.002",
+      "modifier": "Array",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.002::Array::Socket_46",
+      "name": "Exclude Last",
+      "type": "boolean",
+      "default": false,
+      "object": "Cylinder.002",
+      "modifier": "Array",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.002::Array::Socket_18",
+      "name": "Seed",
+      "type": "integer",
+      "default": 0,
+      "object": "Cylinder.002",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": -10000,
+      "maximum": 10000
+    },
+    {
+      "id": "Cylinder.002::Array::Socket_31",
+      "name": "Merge",
+      "type": "boolean",
+      "default": false,
+      "object": "Cylinder.002",
+      "modifier": "Array",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.002::Array::Socket_32",
+      "name": "Merge Distance",
+      "type": "float",
+      "default": 0.0010000000474974513,
+      "object": "Cylinder.002",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cylinder.002::Array.001::Socket_5",
+      "name": "Count",
+      "type": "integer",
+      "default": 3,
+      "object": "Cylinder.002",
+      "modifier": "Array.001",
+      "hidden": false,
+      "minimum": 1,
+      "maximum": 10000
+    },
+    {
+      "id": "Cylinder.002::Array.001::Socket_34",
+      "name": "Distance",
+      "type": "float",
+      "default": 1.0,
+      "object": "Cylinder.002",
+      "modifier": "Array.001",
+      "hidden": false,
+      "minimum": 0.009999999776482582,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cylinder.002::Array.001::Socket_37",
+      "name": "Angular Distance",
+      "type": "float",
+      "default": 0.7853981852531433,
+      "object": "Cylinder.002",
+      "modifier": "Array.001",
+      "hidden": false,
+      "minimum": 0.01745329238474369,
+      "maximum": 6.2831854820251465
+    },
+    {
+      "id": "Cylinder.002::Array.001::Socket_35",
+      "name": "Per Curve",
+      "type": "boolean",
+      "default": true,
+      "object": "Cylinder.002",
+      "modifier": "Array.001",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.002::Array.001::Socket_8",
+      "name": "Translation",
+      "type": "vector",
+      "default": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "object": "Cylinder.002",
+      "modifier": "Array.001",
+      "hidden": false,
+      "minimum": -3.4028234663852886e+38,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cylinder.002::Array.001::Socket_21",
+      "name": "Offset",
+      "type": "vector",
+      "default": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "object": "Cylinder.002",
+      "modifier": "Array.001",
+      "hidden": false,
+      "minimum": -3.4028234663852886e+38,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cylinder.002::Array.001::Socket_10",
+      "name": "Scale",
+      "type": "vector",
+      "default": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "object": "Cylinder.002",
+      "modifier": "Array.001",
+      "hidden": false,
+      "minimum": -3.4028234663852886e+38,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cylinder.002::Array.001::Socket_28",
+      "name": "Sweep Angle",
+      "type": "float",
+      "default": 3.1415927410125732,
+      "object": "Cylinder.002",
+      "modifier": "Array.001",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 6.2831854820251465
+    },
+    {
+      "id": "Cylinder.002::Array.001::Socket_6",
+      "name": "Radius",
+      "type": "float",
+      "default": 0.0,
+      "object": "Cylinder.002",
+      "modifier": "Array.001",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cylinder.002::Array.001::Socket_26",
+      "name": "Relative Space",
+      "type": "boolean",
+      "default": true,
+      "object": "Cylinder.002",
+      "modifier": "Array.001",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.002::Array.001::Socket_38",
+      "name": "Realize Instances",
+      "type": "boolean",
+      "default": true,
+      "object": "Cylinder.002",
+      "modifier": "Array.001",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.002::Array.001::Socket_12",
+      "name": "Align Rotation",
+      "type": "boolean",
+      "default": true,
+      "object": "Cylinder.002",
+      "modifier": "Array.001",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.002::Array.001::Socket_17",
+      "name": "Randomize",
+      "type": "boolean",
+      "default": false,
+      "object": "Cylinder.002",
+      "modifier": "Array.001",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.002::Array.001::Socket_42",
+      "name": "Randomize Offset",
+      "type": "vector",
+      "default": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "object": "Cylinder.002",
+      "modifier": "Array.001",
+      "hidden": false,
+      "minimum": -10000.0,
+      "maximum": 10000.0
+    },
+    {
+      "id": "Cylinder.002::Array.001::Socket_15",
+      "name": "Randomize Rotation",
+      "type": "vector",
+      "default": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "object": "Cylinder.002",
+      "modifier": "Array.001",
+      "hidden": false,
+      "minimum": -3.4028234663852886e+38,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cylinder.002::Array.001::Socket_19",
+      "name": "Randomize Scale",
+      "type": "vector",
+      "default": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "object": "Cylinder.002",
+      "modifier": "Array.001",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    {
+      "id": "Cylinder.002::Array.001::Socket_44",
+      "name": "Randomize Scale",
+      "type": "float",
+      "default": 0.0,
+      "object": "Cylinder.002",
+      "modifier": "Array.001",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    {
+      "id": "Cylinder.002::Array.001::Socket_45",
+      "name": "Randomize Flipping",
+      "type": "vector",
+      "default": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "object": "Cylinder.002",
+      "modifier": "Array.001",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    {
+      "id": "Cylinder.002::Array.001::Socket_22",
+      "name": "Exclude First",
+      "type": "boolean",
+      "default": true,
+      "object": "Cylinder.002",
+      "modifier": "Array.001",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.002::Array.001::Socket_46",
+      "name": "Exclude Last",
+      "type": "boolean",
+      "default": false,
+      "object": "Cylinder.002",
+      "modifier": "Array.001",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.002::Array.001::Socket_18",
+      "name": "Seed",
+      "type": "integer",
+      "default": 0,
+      "object": "Cylinder.002",
+      "modifier": "Array.001",
+      "hidden": false,
+      "minimum": -10000,
+      "maximum": 10000
+    },
+    {
+      "id": "Cylinder.002::Array.001::Socket_31",
+      "name": "Merge",
+      "type": "boolean",
+      "default": false,
+      "object": "Cylinder.002",
+      "modifier": "Array.001",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.002::Array.001::Socket_32",
+      "name": "Merge Distance",
+      "type": "float",
+      "default": 0.0010000000474974513,
+      "object": "Cylinder.002",
+      "modifier": "Array.001",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cylinder.002::Smooth by Angle::Input_1",
+      "name": "Angle",
+      "type": "float",
+      "default": 0.5235987901687622,
+      "object": "Cylinder.002",
+      "modifier": "Smooth by Angle",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 3.1415927410125732
+    },
+    {
+      "id": "Cylinder.002::Smooth by Angle::Socket_1",
+      "name": "Ignore Sharpness",
+      "type": "boolean",
+      "default": false,
+      "object": "Cylinder.002",
+      "modifier": "Smooth by Angle",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.003::Smooth by Angle::Input_1",
+      "name": "Angle",
+      "type": "float",
+      "default": 0.5235987901687622,
+      "object": "Cylinder.003",
+      "modifier": "Smooth by Angle",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 3.1415927410125732
+    },
+    {
+      "id": "Cylinder.003::Smooth by Angle::Socket_1",
+      "name": "Ignore Sharpness",
+      "type": "boolean",
+      "default": false,
+      "object": "Cylinder.003",
+      "modifier": "Smooth by Angle",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.004::Array::Socket_5",
+      "name": "Count",
+      "type": "integer",
+      "default": 3,
+      "object": "Cylinder.004",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": 1,
+      "maximum": 10000
+    },
+    {
+      "id": "Cylinder.004::Array::Socket_34",
+      "name": "Distance",
+      "type": "float",
+      "default": 1.0,
+      "object": "Cylinder.004",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": 0.009999999776482582,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cylinder.004::Array::Socket_37",
+      "name": "Angular Distance",
+      "type": "float",
+      "default": 0.7853981852531433,
+      "object": "Cylinder.004",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": 0.01745329238474369,
+      "maximum": 6.2831854820251465
+    },
+    {
+      "id": "Cylinder.004::Array::Socket_35",
+      "name": "Per Curve",
+      "type": "boolean",
+      "default": true,
+      "object": "Cylinder.004",
+      "modifier": "Array",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.004::Array::Socket_8",
+      "name": "Translation",
+      "type": "vector",
+      "default": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "object": "Cylinder.004",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": -3.4028234663852886e+38,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cylinder.004::Array::Socket_21",
+      "name": "Offset",
+      "type": "vector",
+      "default": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "object": "Cylinder.004",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": -3.4028234663852886e+38,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cylinder.004::Array::Socket_10",
+      "name": "Scale",
+      "type": "vector",
+      "default": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "object": "Cylinder.004",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": -3.4028234663852886e+38,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cylinder.004::Array::Socket_28",
+      "name": "Sweep Angle",
+      "type": "float",
+      "default": 3.1415927410125732,
+      "object": "Cylinder.004",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 6.2831854820251465
+    },
+    {
+      "id": "Cylinder.004::Array::Socket_6",
+      "name": "Radius",
+      "type": "float",
+      "default": 0.0,
+      "object": "Cylinder.004",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cylinder.004::Array::Socket_26",
+      "name": "Relative Space",
+      "type": "boolean",
+      "default": true,
+      "object": "Cylinder.004",
+      "modifier": "Array",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.004::Array::Socket_38",
+      "name": "Realize Instances",
+      "type": "boolean",
+      "default": true,
+      "object": "Cylinder.004",
+      "modifier": "Array",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.004::Array::Socket_12",
+      "name": "Align Rotation",
+      "type": "boolean",
+      "default": true,
+      "object": "Cylinder.004",
+      "modifier": "Array",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.004::Array::Socket_17",
+      "name": "Randomize",
+      "type": "boolean",
+      "default": false,
+      "object": "Cylinder.004",
+      "modifier": "Array",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.004::Array::Socket_42",
+      "name": "Randomize Offset",
+      "type": "vector",
+      "default": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "object": "Cylinder.004",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": -10000.0,
+      "maximum": 10000.0
+    },
+    {
+      "id": "Cylinder.004::Array::Socket_15",
+      "name": "Randomize Rotation",
+      "type": "vector",
+      "default": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "object": "Cylinder.004",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": -3.4028234663852886e+38,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cylinder.004::Array::Socket_19",
+      "name": "Randomize Scale",
+      "type": "vector",
+      "default": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "object": "Cylinder.004",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    {
+      "id": "Cylinder.004::Array::Socket_44",
+      "name": "Randomize Scale",
+      "type": "float",
+      "default": 0.0,
+      "object": "Cylinder.004",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    {
+      "id": "Cylinder.004::Array::Socket_45",
+      "name": "Randomize Flipping",
+      "type": "vector",
+      "default": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "object": "Cylinder.004",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    {
+      "id": "Cylinder.004::Array::Socket_22",
+      "name": "Exclude First",
+      "type": "boolean",
+      "default": true,
+      "object": "Cylinder.004",
+      "modifier": "Array",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.004::Array::Socket_46",
+      "name": "Exclude Last",
+      "type": "boolean",
+      "default": false,
+      "object": "Cylinder.004",
+      "modifier": "Array",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.004::Array::Socket_18",
+      "name": "Seed",
+      "type": "integer",
+      "default": 0,
+      "object": "Cylinder.004",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": -10000,
+      "maximum": 10000
+    },
+    {
+      "id": "Cylinder.004::Array::Socket_31",
+      "name": "Merge",
+      "type": "boolean",
+      "default": false,
+      "object": "Cylinder.004",
+      "modifier": "Array",
+      "hidden": false
+    },
+    {
+      "id": "Cylinder.004::Array::Socket_32",
+      "name": "Merge Distance",
+      "type": "float",
+      "default": 0.0010000000474974513,
+      "object": "Cylinder.004",
+      "modifier": "Array",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 3.4028234663852886e+38
+    },
+    {
+      "id": "Cylinder.004::Smooth by Angle::Input_1",
+      "name": "Angle",
+      "type": "float",
+      "default": 0.5235987901687622,
+      "object": "Cylinder.004",
+      "modifier": "Smooth by Angle",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 3.1415927410125732
+    },
+    {
+      "id": "Cylinder.004::Smooth by Angle::Socket_1",
+      "name": "Ignore Sharpness",
+      "type": "boolean",
+      "default": false,
+      "object": "Cylinder.004",
+      "modifier": "Smooth by Angle",
+      "hidden": false
+    },
+    {
+      "id": "Plane::Smooth by Angle::Input_1",
+      "name": "Angle",
+      "type": "float",
+      "default": 0.5235987901687622,
+      "object": "Plane",
+      "modifier": "Smooth by Angle",
+      "hidden": false,
+      "minimum": 0.0,
+      "maximum": 3.1415927410125732
+    },
+    {
+      "id": "Plane::Smooth by Angle::Socket_1",
+      "name": "Ignore Sharpness",
+      "type": "boolean",
+      "default": false,
+      "object": "Plane",
+      "modifier": "Smooth by Angle",
+      "hidden": false
+    }
+  ]
+}
