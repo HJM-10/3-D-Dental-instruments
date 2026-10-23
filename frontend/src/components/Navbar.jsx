@@ -1,12 +1,14 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import { useContext, useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { CartContext } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
 import {
-  Menu, Sun, Moon, LogOut, Settings, User,
-  ShoppingCart, ChevronRight,
+  Menu, Sun, Moon, LogOut, Settings,
+  ShoppingCart, ChevronRight, Palette,
 } from 'lucide-react';
+import { useAppearance } from '../context/AppearanceContext';
+import AppearancePanel from './AppearancePanel';
 
 const ROUTE_LABELS = {
   '/dashboard':  'Dashboard',
@@ -33,7 +35,9 @@ const Navbar = ({ toggleSidebar }) => {
   const navigate         = useNavigate();
   const location         = useLocation();
 
-  const [theme, setTheme]       = useState(() => localStorage.getItem('theme') || 'dark');
+  const { mode: theme, setMode: setTheme } = useAppearance();
+  const [appearanceOpen, setAppearanceOpen] = useState(false);
+  const appearanceRef = useRef(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -43,21 +47,18 @@ const Navbar = ({ toggleSidebar }) => {
   const currentLabel = matchedRoute ? ROUTE_LABELS[matchedRoute] : 'Dashboard';
   const roleInfo     = ROLE_BADGE[user?.role] || ROLE_BADGE.user;
 
-  // Sync theme with document
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
   // Close dropdown on outside click
   useEffect(() => {
     const handler = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setDropdownOpen(false);
       }
+      if (appearanceRef.current && !appearanceRef.current.contains(e.target)) setAppearanceOpen(false);
     };
     document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
+    const onKey = (event) => { if (event.key === 'Escape') { setAppearanceOpen(false); setDropdownOpen(false); } };
+    document.addEventListener('keydown', onKey);
+    return () => { document.removeEventListener('mousedown', handler); document.removeEventListener('keydown', onKey); };
   }, []);
 
   const handleLogout = async () => {
@@ -111,6 +112,10 @@ const Navbar = ({ toggleSidebar }) => {
 
       {/* Right side */}
       <div className="topbar-right">
+        {isAdminRole && <div className="appearance-menu" ref={appearanceRef}>
+          <button className="btn-icon" aria-label="Customize appearance" aria-expanded={appearanceOpen} onClick={() => setAppearanceOpen((open) => !open)}><Palette size={19} /></button>
+          {appearanceOpen && <div className="appearance-popover"><AppearancePanel /></div>}
+        </div>}
         {/* Cart badge (non-admin only) */}
         {!isAdminRole && (
           <div className="cart-badge-wrap">

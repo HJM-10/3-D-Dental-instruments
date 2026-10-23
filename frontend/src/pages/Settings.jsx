@@ -1,7 +1,8 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import { UploadCloud, User, Mail, Lock, Save } from 'lucide-react';
+import AppearancePanel from '../components/AppearancePanel';
 
 const Settings = () => {
   const { user, updateProfile } = useContext(AuthContext);
@@ -57,6 +58,7 @@ const Settings = () => {
         <p style={{ color: 'var(--text-muted)' }}>Manage your profile and security preferences.</p>
       </div>
 
+      {['admin', 'super_admin'].includes(user.role) && <div className="card" style={{ marginBottom: '1.5rem' }}><AppearancePanel /></div>}
       <div className="card" style={{ padding: '2rem' }}>
         <form onSubmit={handleSubmit}>
 

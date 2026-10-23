@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import { Box, Package, ArrowRight } from 'lucide-react';
+import AdminOverview from '../components/AdminOverview';
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
@@ -12,19 +13,25 @@ const Dashboard = () => {
   const isAdminRole = user?.role === 'admin' || user?.role === 'super_admin';
 
   useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
+    if (isAdminRole) return;
+    let active = true;
+    const fetchData = async () => {
     try {
       const catRes = await api.get('/categories/');
       const prodRes = await api.get('/products/');
-      setCategories(catRes.data.slice(0, 3)); // top 3
-      setProducts(prodRes.data.slice(0, 4)); // top 4
+      if (active) {
+        setCategories(catRes.data.slice(0, 3)); // top 3
+        setProducts(prodRes.data.slice(0, 4)); // top 4
+      }
     } catch (e) {
       console.error(e);
     }
-  };
+    };
+    fetchData();
+    return () => { active = false; };
+  }, [isAdminRole]);
+
+  if (isAdminRole) return <AdminOverview />;
 
   return (
     <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '3rem', paddingBottom: '2rem' }}>

@@ -64,14 +64,14 @@ const SalesLineChart = ({ data }) => {
     <div className="analytics-chart-panel analytics-wide-panel">
       <div className="analytics-panel-header">
         <div>
-          <h3>Revenue Trend</h3>
-          <p>Daily revenue across the last 30 days</p>
+          <h3>Order Value Trend</h3>
+          <p>Daily placed order value across the last 30 days</p>
         </div>
-        <span>{money(maxRevenue)} peak</span>
+        <span>{money(Math.max(...points.map((item) => Number(item.revenue || 0)), 0))} peak</span>
       </div>
       {points.length ? (
         <div className="analytics-line-chart">
-          <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label="Revenue trend chart">
+          <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label="Placed order value trend chart">
             <line x1={padding} y1={height - padding} x2={width - padding} y2={height - padding} />
             <line x1={padding} y1={padding} x2={padding} y2={height - padding} />
             <path d={path} />
@@ -323,7 +323,7 @@ const Analytics = () => {
       </div>
 
       <section className="analytics-kpi-grid">
-        <KpiCard icon={DollarSign} label="Revenue" value={money(metrics.total_revenue)} detail={`${money(metrics.avg_order_value)} avg order`} tone="green" />
+        <KpiCard icon={DollarSign} label="Order value" value={money(metrics.total_revenue)} detail="All orders; payment collection not connected" tone="green" />
         <KpiCard icon={ShoppingBag} label="Orders" value={number(metrics.total_orders)} detail="All statuses included" tone="blue" />
         <KpiCard icon={Users} label="Customers" value={number(metrics.total_customers || metrics.total_users)} detail={`${number(metrics.total_users)} total accounts`} tone="purple" />
         <KpiCard icon={Eye} label="Product views" value={number(metrics.total_product_views)} detail={`${seconds(metrics.avg_product_view_seconds)} avg view`} tone="amber" />

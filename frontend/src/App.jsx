@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import AppearanceProvider from './context/AppearanceProvider';
 import { CartProvider } from './context/CartContext';
 import { ToastProvider } from './context/ToastContext';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -33,6 +34,7 @@ function NotFound() {
 function App() {
   return (
     <AuthProvider>
+      <AppearanceProvider>
       <ToastProvider>
         <CartProvider>
           <CustomCursor />
@@ -71,6 +73,7 @@ function App() {
           </BrowserRouter>
         </CartProvider>
       </ToastProvider>
+      </AppearanceProvider>
     </AuthProvider>
   );
 }
