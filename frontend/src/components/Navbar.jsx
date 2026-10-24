@@ -5,7 +5,7 @@ import { CartContext } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
 import {
   Menu, Sun, Moon, LogOut, Settings,
-  ShoppingCart, ChevronRight, Palette,
+  ShoppingCart, ChevronRight, Palette, Search, ArrowRight,
 } from 'lucide-react';
 import { useAppearance } from '../context/AppearanceContext';
 import AppearancePanel from './AppearancePanel';
@@ -20,6 +20,7 @@ const ROUTE_LABELS = {
   '/analytics':  'Analytics',
   '/users':      'Users',
   '/customize':  'Customize',
+  '/quotes':     'Quotes',
 };
 
 const ROLE_BADGE = {
@@ -37,6 +38,9 @@ const Navbar = ({ toggleSidebar }) => {
 
   const { mode: theme, setMode: setTheme } = useAppearance();
   const [appearanceOpen, setAppearanceOpen] = useState(false);
+  const [searchDraft, setSearchDraft] = useState(null);
+  const search = searchDraft?.key === location.key ? searchDraft.value : new URLSearchParams(location.search).get('q') || '';
+  const setSearch = (value) => setSearchDraft({ key: location.key, value });
   const appearanceRef = useRef(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -108,6 +112,9 @@ const Navbar = ({ toggleSidebar }) => {
         <span className="topbar-title mobile-only-flex" id="topbar-mobile-title">
           {currentLabel}
         </span>
+        {!isAdminRole && <form className="customer-global-search" role="search" onSubmit={(event) => { event.preventDefault(); navigate(`/categories?q=${encodeURIComponent(search.trim())}`); }}>
+          <Search size={18} /><input aria-label="Search instruments" placeholder="Search instruments, kits, or part numbers…" value={search} onChange={(event) => setSearch(event.target.value)} /><button type="submit" aria-label="Submit instrument search"><ArrowRight size={17} /></button>
+        </form>}
       </div>
 
       {/* Right side */}

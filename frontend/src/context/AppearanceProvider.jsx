@@ -9,7 +9,7 @@ function UserAppearance({ user, children }) {
     let saved = {};
     try { saved = JSON.parse(localStorage.getItem(storageKey)) || {}; } catch { /* Use defaults. */ }
     return {
-      mode: isAdmin ? (saved.mode === 'dark' ? 'dark' : 'light') : (localStorage.getItem('theme') || 'dark'),
+      mode: isAdmin ? (saved.mode === 'dark' ? 'dark' : 'light') : (saved.mode || localStorage.getItem('theme') || (user ? 'light' : 'dark')),
       accent: ACCENTS.some((item) => item.id === saved.accent) ? saved.accent : 'green',
     };
   });
@@ -18,22 +18,28 @@ function UserAppearance({ user, children }) {
     const root = document.documentElement;
     root.dataset.theme = appearance.mode;
     if (isAdmin) {
+      delete root.dataset.customer;
       root.dataset.admin = 'true';
       root.dataset.accent = appearance.accent;
       root.style.setProperty('--admin-hue', ACCENTS.find((item) => item.id === appearance.accent).hue);
       localStorage.setItem(storageKey, JSON.stringify(appearance));
     } else {
+      if (user) {
+        root.dataset.customer = 'true';
+        localStorage.setItem(storageKey, JSON.stringify(appearance));
+      } else delete root.dataset.customer;
       delete root.dataset.admin;
       delete root.dataset.accent;
       root.style.removeProperty('--admin-hue');
       localStorage.setItem('theme', appearance.mode);
     }
     return () => {
+      delete root.dataset.customer;
       delete root.dataset.admin;
       delete root.dataset.accent;
       root.style.removeProperty('--admin-hue');
     };
-  }, [appearance, isAdmin, storageKey]);
+  }, [appearance, isAdmin, storageKey, user]);
 
   return <AppearanceContext.Provider value={{ ...appearance, isAdmin,
     setMode: (mode) => setAppearance((value) => ({ ...value, mode })),

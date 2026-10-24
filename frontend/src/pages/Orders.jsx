@@ -1,34 +1,36 @@
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { useToast } from '../context/ToastContext';
 import api from '../services/api';
+import CustomerOrders from '../components/customer/CustomerOrders';
 import { Package, Clock, CheckCircle, Truck, FileText } from 'lucide-react';
 
-const Orders = () => {
+const AdminOrders = () => {
   const { user } = useContext(AuthContext);
-  const toast = useToast();
+  const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const isAdminRole = user?.role === 'admin' || user?.role === 'super_admin';
 
   useEffect(() => {
-    fetchOrders();
-  }, []);
-
-  const fetchOrders = async () => {
+    let active = true;
+    const fetchOrders = async () => {
     try {
       const res = await api.get('/orders/');
       // Sort orders descending by ID (newest first)
-      setOrders(res.data.sort((a, b) => b.id - a.id));
+      if (active) setOrders(res.data.sort((a, b) => b.id - a.id));
     } catch (e) {
       console.error(e);
     } finally {
-      setLoading(false);
+      if (active) setLoading(false);
     }
-  };
+    };
+    fetchOrders();
+    return () => { active = false; };
+  }, []);
 
   const handleViewOrder = (orderId) => {
-    window.location.href = `/orders/${orderId}`;
+    navigate(`/orders/${orderId}`);
   };
 
   if (loading) {
@@ -138,4 +140,7 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default function Orders() {
+  const { user } = useContext(AuthContext);
+  return ['admin', 'super_admin'].includes(user?.role) ? <AdminOrders /> : <CustomerOrders />;
+}

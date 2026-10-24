@@ -17,6 +17,7 @@ import OrderTracking from './pages/OrderTracking';
 import CustomCursor from './components/CustomCursor';
 import ApiErrorListener from './components/ApiErrorListener';
 import ProductCustomizer3D from './components/ProductCustomizer3D';
+import CustomerOrders from './components/customer/CustomerOrders';
 
 function NotFound() {
   return (
@@ -52,6 +53,7 @@ function App() {
                 <Route path="/products/:id" element={<ProductDetails />} />
                 <Route path="/cart"         element={<Cart />} />
                 <Route path="/orders"       element={<Orders />} />
+                <Route path="/quotes" element={<CustomerOrders quotesOnly />} />
                 <Route path="/orders/:id"   element={<OrderTracking />} />
                 <Route path="/settings"     element={<Settings />} />
                 {/* /customize always requires a product ID — bare path redirects to catalog */}

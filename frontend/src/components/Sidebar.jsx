@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import {
   LayoutDashboard, ShoppingBag, ShoppingCart,
-  Settings, Users, Box, BarChart3, Edit3, X, LogOut, Activity,
+  Settings, Users, Box, BarChart3, Edit3, X, LogOut, FileText,
 } from 'lucide-react';
 
 const ROLE_BADGE = {
@@ -12,6 +12,12 @@ const ROLE_BADGE = {
   admin:       { label: 'Admin',       cls: 'badge-primary'   },
   user:        { label: 'User',        cls: 'badge-success'   },
 };
+
+const NavItem = ({ to, icon: Icon, label, id, onNavigate }) => (
+  <NavLink to={to} id={id} onClick={onNavigate} className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+    <Icon size={18} className="nav-icon" />{label}
+  </NavLink>
+);
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
   const { user, logout } = useContext(AuthContext);
@@ -42,18 +48,6 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
   if (!user) return null;
 
-  const NavItem = ({ to, icon: Icon, label, id }) => (
-    <NavLink
-      to={to}
-      id={id}
-      onClick={close}
-      className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
-    >
-      <Icon size={18} className="nav-icon" />
-      {label}
-    </NavLink>
-  );
-
   return (
     <div className={`sidebar ${isOpen ? 'open' : ''}`} id="main-sidebar" aria-label="Main navigation">
       {/* Logo row */}
@@ -83,25 +77,26 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       <nav className="sidebar-nav" role="navigation">
         <span className="sidebar-section-label">Main</span>
 
-        <NavItem to="/dashboard"  icon={LayoutDashboard} label="Dashboard"  id="nav-dashboard" />
-        <NavItem to="/categories" icon={Box}             label="Categories" id="nav-categories" />
-        <NavItem to="/orders"     icon={ShoppingBag}     label="Orders"     id="nav-orders" />
+        <NavItem onNavigate={close} to="/dashboard"  icon={LayoutDashboard} label="Dashboard"  id="nav-dashboard" />
+        <NavItem onNavigate={close} to="/categories" icon={Box}             label={isAdminRole ? 'Categories' : 'Browse instruments'} id="nav-categories" />
+        <NavItem onNavigate={close} to="/orders"     icon={ShoppingBag}     label={isAdminRole ? 'Orders' : 'My orders'} id="nav-orders" />
+        {!isAdminRole && <NavItem onNavigate={close} to="/quotes" icon={FileText} label="Quotes" id="nav-quotes" />}
 
         {!isAdminRole && (
-          <NavItem to="/cart" icon={ShoppingCart} label="Cart" id="nav-cart" />
+          <NavItem onNavigate={close} to="/cart" icon={ShoppingCart} label="Cart" id="nav-cart" />
         )}
 
-        <NavItem to="/customize" icon={Edit3}     label="Customize" id="nav-customize" />
-        <NavItem to="/settings"  icon={Settings}  label="Settings"  id="nav-settings" />
+        <NavItem onNavigate={close} to="/customize" icon={Edit3}     label={isAdminRole ? 'Customize' : 'Build a kit'} id="nav-customize" />
+        <NavItem onNavigate={close} to="/settings"  icon={Settings}  label="Settings"  id="nav-settings" />
 
         {isAdminRole && (
           <>
             <span className="sidebar-section-label" style={{ marginTop: '0.5rem' }}>
               Administration
             </span>
-            <NavItem to="/analytics" icon={BarChart3} label="Analytics" id="nav-analytics" />
+            <NavItem onNavigate={close} to="/analytics" icon={BarChart3} label="Analytics" id="nav-analytics" />
             {isSuperAdmin && (
-              <NavItem to="/users" icon={Users} label="Users" id="nav-users" />
+              <NavItem onNavigate={close} to="/users" icon={Users} label="Users" id="nav-users" />
             )}
           </>
         )}

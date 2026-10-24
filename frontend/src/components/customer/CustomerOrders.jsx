@@ -1,0 +1,18 @@
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, FileText, Package } from 'lucide-react';
+import api from '../../services/api';
+import { imageUrl, isQuote, money, orderNumber, statusLabel } from './store';
+
+export default function CustomerOrders({ quotesOnly = false }) {
+  const [state, setState] = useState({ orders: [], loading: true, error: '' });
+  const [filter, setFilter] = useState('all');
+  const [version, setVersion] = useState(0);
+  useEffect(() => {
+    let active = true;
+    api.get('/orders/').then(({ data }) => { if (active) setState({ orders: data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at) || b.id - a.id), loading: false, error: '' }); }).catch(() => { if (active) setState((value) => ({ ...value, loading: false, error: 'We couldn’t load your orders. Please try again.' })); });
+    return () => { active = false; };
+  }, [version]);
+  const orders = state.orders.filter((order) => (!quotesOnly || isQuote(order)) && (filter === 'all' || (filter === 'active' ? !['delivered', 'denied', 'cancelled'].includes(order.status) : order.status === filter)));
+  return <div className="customer-orders"><header className="customer-page-heading"><span className="customer-eyebrow">{quotesOnly ? 'YOUR NEXT KIT, ONE STEP CLOSER' : 'EVERY STEP, IN SIGHT'}</span><h1>{quotesOnly ? 'Your quotes' : 'Your orders'}<span>.</span></h1><p>{quotesOnly ? 'Review updated quotes and follow your custom requests.' : 'From your first request to your latest delivery.'}</p></header>{!quotesOnly && <div className="customer-filter-tabs">{[['all', 'All orders'], ['active', 'In progress'], ['shipped', 'Shipped'], ['delivered', 'Delivered']].map(([id, label]) => <button key={id} aria-pressed={filter === id} onClick={() => setFilter(id)}>{label}</button>)}</div>}{state.loading ? <p role="status" className="customer-loading">Loading your {quotesOnly ? 'quotes' : 'orders'}…</p> : state.error ? <div className="customer-error" role="alert"><p>{state.error}</p><button className="btn btn-primary" onClick={() => setVersion((value) => value + 1)}>Try again</button></div> : !orders.length ? <div className="customer-empty">{quotesOnly ? <FileText size={36} /> : <Package size={36} />}<h2>{quotesOnly ? 'No quote requests yet' : 'No orders here yet'}</h2><p>Explore instruments and start putting your next kit together.</p><Link className="btn btn-primary" to="/categories">Browse instruments</Link></div> : <div className="customer-order-list">{orders.map((order) => <article className="customer-order-card" key={order.id}><div className="customer-order-card-top"><div><strong>{orderNumber(order.id)}</strong><span>Placed {new Date(order.created_at).toLocaleDateString('en', { month: 'short', day: 'numeric', year: 'numeric' })}</span></div><span className="customer-status">{statusLabel(order.status)}</span></div><div className="customer-order-card-body"><div className="customer-order-thumbnails">{order.items.slice(0, 3).map((item) => <span key={item.id}>{item.product?.images?.[0] ? <img src={imageUrl(item.product.images[0])} alt={item.product.name} /> : <Package size={22} />}</span>)}</div><div className="customer-order-items"><h2>{order.items.map((item) => item.product?.name || 'Instrument').join(', ')}</h2><p>{order.items.reduce((sum, item) => sum + item.quantity, 0)} instruments · {order.items.length} selections</p></div><strong className="customer-order-total">{money(order.total_price)}</strong><Link className="customer-outline-link" to={`/orders/${order.id}`}>{order.status === 'requoted' ? 'Review quote' : 'View progress'} <ArrowRight size={15} /></Link></div></article>)}</div>}</div>;
+}

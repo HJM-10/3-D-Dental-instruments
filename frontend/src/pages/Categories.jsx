@@ -3,9 +3,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { CartContext } from '../context/CartContext';
 import api from '../services/api';
+import CustomerCatalog from '../components/customer/CustomerCatalog';
 import { Plus, Package, Box, ShoppingCart, Image as ImageIcon, ChevronLeft, ChevronRight, X, Edit3, Trash2, Lock, Unlock } from 'lucide-react';
 
-const Categories = () => {
+const AdminCategories = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useContext(AuthContext);
@@ -552,4 +553,7 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default function Categories() {
+  const { user } = useContext(AuthContext);
+  return ['admin', 'super_admin'].includes(user?.role) ? <AdminCategories /> : <CustomerCatalog />;
+}
