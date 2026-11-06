@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import inspect
 from database import engine, Base
 import models
 from fastapi.staticfiles import StaticFiles
@@ -8,6 +9,18 @@ from routes import auth_routes, category_routes, product_routes, cart_routes, or
 
 # Create tables
 Base.metadata.create_all(bind=engine)
+
+# Upgrade existing databases while preserving orders that predate courier selection.
+with engine.begin() as connection:
+    dialect = connection.dialect.name
+    if dialect == "sqlite":
+        connection.exec_driver_sql("BEGIN IMMEDIATE")
+    columns = inspect(connection).get_columns("orders")
+    if not any(column["name"] == "shipping_carrier" for column in columns):
+        if dialect == "postgresql":
+            connection.exec_driver_sql("ALTER TABLE orders ADD COLUMN IF NOT EXISTS shipping_carrier VARCHAR")
+        else:
+            connection.exec_driver_sql("ALTER TABLE orders ADD COLUMN shipping_carrier VARCHAR")
 
 app = FastAPI(title="DNF Trading API")
 

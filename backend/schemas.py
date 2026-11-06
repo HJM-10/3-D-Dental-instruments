@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr
-from typing import Optional, List, Dict, Any
+from typing import Optional, List, Dict, Any, Literal
 from datetime import datetime
 
 # User Schemas
@@ -119,9 +119,12 @@ class CartResponse(BaseModel):
         from_attributes = True
 
 # Order Schemas
+ShippingCarrier = Literal["DHL", "FedEx", "UPS", "Post Office"]
+
 class OrderCreate(BaseModel):
     contact_method: str
     contact_value: str
+    shipping_carrier: Optional[ShippingCarrier] = None
 
 class OrderReview(BaseModel):
     action: str # "approve", "deny", "requote"
@@ -147,6 +150,7 @@ class OrderResponse(BaseModel):
     total_price: float
     status: str
     shipping_id: Optional[str]
+    shipping_carrier: Optional[str] = None
     contact_method: Optional[str] = None
     contact_value: Optional[str] = None
     created_at: datetime

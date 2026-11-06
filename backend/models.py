@@ -90,6 +90,7 @@ class Order(Base):
     total_price = Column(Float, nullable=False)
     status = Column(String, default="pending_approval")
     shipping_id = Column(String, nullable=True)
+    shipping_carrier = Column(String, nullable=True)
     contact_method = Column(String, nullable=True)
     contact_value = Column(String, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)

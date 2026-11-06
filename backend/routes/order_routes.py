@@ -31,11 +31,11 @@ def create_order(order_req: schemas.OrderCreate, db: Session = Depends(get_db), 
         total_price=total_price,
         status="pending_approval",
         contact_method=order_req.contact_method,
-        contact_value=order_req.contact_value
+        contact_value=order_req.contact_value,
+        shipping_carrier=order_req.shipping_carrier,
     )
     db.add(new_order)
-    db.commit()
-    db.refresh(new_order)
+    db.flush()
     
     for item in cart.items:
         order_item = models.OrderItem(

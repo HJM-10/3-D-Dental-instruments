@@ -4,6 +4,7 @@ import api from '../services/api';
 import BlenderControls from './blender/BlenderControls';
 import BlenderViewer from './blender/BlenderViewer';
 import SlotOrderPanel from './blender/SlotOrderPanel';
+import { INSTRUMENT_OPTIONS } from './instrumentOptions';
 import { AuthContext } from '../context/AuthContext';
 import { useParams, useNavigate, Navigate } from 'react-router-dom';
 
@@ -118,6 +119,9 @@ export default function ProductCustomizer3D() {
     const displaySlots = {};
     for (const [slotName, params] of Object.entries(filledSlots)) {
       displaySlots[slotName] = {};
+      for (const { field_name: name } of INSTRUMENT_OPTIONS) {
+        if (params[name]) displaySlots[slotName][name] = params[name];
+      }
       for (const input of schema?.inputs || []) {
         if (input.hidden) continue;
         const raw = params[input.id];

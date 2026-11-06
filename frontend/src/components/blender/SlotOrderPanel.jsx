@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { ShoppingCart, X, Plus, Package, ChevronRight } from 'lucide-react';
+import { INSTRUMENT_OPTIONS } from '../instrumentOptions';
 
 const UNIT_SCALERS = {
   none: { suffix: '' },
@@ -23,7 +24,10 @@ function buildSlotNames(prefix = 'Slot.', count = 30) {
 // Format a param value for display using visible inputs from the schema
 function formatParamSummary(params, schema) {
   if (!schema?.inputs || !params) return [];
-  return schema.inputs
+  const instrumentOptions = INSTRUMENT_OPTIONS
+    .filter(({ field_name }) => params[field_name])
+    .map(({ field_name }) => ({ label: field_name, value: params[field_name] }));
+  const geometryOptions = schema.inputs
     .filter((input) => !input.hidden)
     .map((input) => {
       const raw = params[input.id];
@@ -53,6 +57,7 @@ function formatParamSummary(params, schema) {
       return { label: input.name, value: displayVal, isColor: Array.isArray(raw) && raw.length === 4, colorHex: Array.isArray(raw) ? `#${raw.slice(0,3).map(c=>Math.round(c*255).toString(16).padStart(2,'0')).join('')}` : null };
     })
     .filter(Boolean);
+  return [...instrumentOptions, ...geometryOptions];
 }
 
 // ─── Single Slot Card ─────────────────────────────────────────────────────────

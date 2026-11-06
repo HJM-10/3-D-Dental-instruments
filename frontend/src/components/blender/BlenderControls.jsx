@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Settings2, Eye, EyeOff, Package } from 'lucide-react';
+import InstrumentOptionFields from '../InstrumentOptionFields';
+import { INSTRUMENT_OPTIONS } from '../instrumentOptions';
 
 const controlMap = {
   float: 'range',
@@ -181,6 +183,7 @@ export default function BlenderControls({
   onLightingIntensityChange,
 }) {
   const [params, setParams] = useState({});
+  const [instrumentOptions, setInstrumentOptions] = useState({});
 
   // Initialize defaults
   useEffect(() => {
@@ -508,6 +511,17 @@ export default function BlenderControls({
         })}
       </div>
 
+      {!isAdmin && (
+        <div>
+          <h3 style={{ marginBottom: '0.5rem' }}>Instrument options for your quote</h3>
+          <InstrumentOptionFields
+            fields={INSTRUMENT_OPTIONS}
+            values={instrumentOptions}
+            onChange={(name, value) => setInstrumentOptions((current) => ({ ...current, [name]: value }))}
+          />
+        </div>
+      )}
+
       {/* Action Buttons */}
       <div style={{ marginTop: '25px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
         {/* Preview / Save Defaults */}
@@ -536,7 +550,7 @@ export default function BlenderControls({
           <button
             onClick={() => {
               if (selectedSlot && typeof onAddToSlot === 'function') {
-                onAddToSlot(params);
+                onAddToSlot({ ...params, ...Object.fromEntries(Object.entries(instrumentOptions).filter(([, value]) => value)) });
               }
             }}
             disabled={!selectedSlot || isLoading}

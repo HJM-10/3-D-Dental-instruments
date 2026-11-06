@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { Trash2, ShoppingCart, CreditCard, CheckCircle, Copy, Mail, FileText, Target } from 'lucide-react';
 import OrderConfigurationDisplay from '../components/OrderConfigurationDisplay';
 
+const SHIPPING_CARRIERS = ['DHL', 'FedEx', 'UPS', 'Post Office'];
+
 const Cart = () => {
   const { cart, fetchCart, removeFromCart } = useContext(CartContext);
   const { user } = useContext(AuthContext);
@@ -16,6 +18,7 @@ const Cart = () => {
   const isAdminRole = user?.role === 'admin' || user?.role === 'super_admin';
   const [contactMethod, setContactMethod] = useState('email');
   const [contactValue, setContactValue] = useState(user?.email || '');
+  const [shippingCarrier, setShippingCarrier] = useState('');
   
   // Admin state
   const [adminCarts, setAdminCarts] = useState([]);
@@ -146,6 +149,10 @@ const Cart = () => {
       toast.error('Missing Contact', 'Please provide a contact number or email.');
       return;
     }
+    if (!shippingCarrier) {
+      toast.error('Missing Courier', 'Please choose a shipping courier.');
+      return;
+    }
     const confirmed = await toast.confirm(
       'Place Order',
       'Confirm your order? You will be redirected to your orders page.',
@@ -157,7 +164,8 @@ const Cart = () => {
     try {
       await api.post('/orders/create', {
         contact_method: contactMethod,
-        contact_value: contactValue
+        contact_value: contactValue,
+        shipping_carrier: shippingCarrier,
       });
       await fetchCart();
       toast.success('Order Placed', 'Your order has been submitted successfully!');
@@ -234,13 +242,21 @@ const Cart = () => {
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.5rem', color: 'var(--text-muted)' }}>
             <span>Taxes & Shipping</span>
-            <span>Calculated at checkout</span>
+            <span>Confirmed after review</span>
           </div>
           
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2rem', paddingTop: '1rem', borderTop: '1px solid var(--glass-border-subtle)', fontWeight: 700, fontSize: '1.5rem' }}>
             <span>Total</span>
             <span style={{ color: 'var(--primary-color)' }}>${calculateTotal().toFixed(2)}</span>
           </div>
+
+          <label style={{ display: 'grid', gap: '0.5rem', marginBottom: '1.5rem' }}>
+            Shipping courier
+            <select className="input-field" value={shippingCarrier} onChange={(e) => setShippingCarrier(e.target.value)} required>
+              <option value="">Select a courier</option>
+              {SHIPPING_CARRIERS.map((carrier) => <option key={carrier}>{carrier}</option>)}
+            </select>
+          </label>
 
           <div style={{ marginBottom: '1.5rem', background: 'var(--bg-base)', padding: '1rem', borderRadius: '0.5rem' }}>
             <h4 style={{ fontSize: '0.9rem', marginBottom: '0.75rem', color: 'var(--text-muted)' }}>Contact Preference</h4>

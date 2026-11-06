@@ -28,6 +28,8 @@ import { useToast } from '../context/ToastContext';
 import { AuthContext } from '../context/AuthContext';
 import { CartContext } from '../context/CartContext';
 import api from '../services/api';
+import InstrumentOptionFields from '../components/InstrumentOptionFields';
+import { INSTRUMENT_OPTIONS } from '../components/instrumentOptions';
 
 const getAnalyticsSessionId = () => {
   const key = 'dnf_guest_session_id';
@@ -156,13 +158,19 @@ const ProductDetails = () => {
   const activeImageSrc = images[activeImage];
   const isInStock = Number(product?.stock_amount || 0) > 0;
   const maxQuantity = Math.max(Number(product?.stock_amount || 1), 1);
-  const productConfigurations = product?.configurations || [];
+  const savedConfigurations = product?.configurations || [];
+  const productConfigurations = product?.configurable
+    ? [...savedConfigurations.filter((config) => !INSTRUMENT_OPTIONS.some(
+      (option) => option.field_name.toLowerCase() === config.field_name.trim().toLowerCase(),
+    )), ...INSTRUMENT_OPTIONS]
+    : savedConfigurations;
 
   const handleConfigChange = (fieldName, value) => {
-    setSelectedConfig((current) => ({
-      ...current,
-      [fieldName]: value,
-    }));
+    setSelectedConfig((current) => {
+      const next = { ...current, [fieldName]: value };
+      if (value === '') delete next[fieldName];
+      return next;
+    });
   };
 
   const handleOpenCustomization = () => {
@@ -454,33 +462,7 @@ const ProductDetails = () => {
                 Product options
               </div>
 
-              <div className="product-config-grid">
-                {productConfigurations.map((config) => (
-                  <label key={config.id} className="product-config-field">
-                    <span>{config.field_name}</span>
-                    {config.field_type === 'dropdown' && config.options?.length ? (
-                      <select
-                        className="input-field"
-                        value={selectedConfig[config.field_name] || ''}
-                        onChange={(e) => handleConfigChange(config.field_name, e.target.value)}
-                      >
-                        <option value="">Select {config.field_name}</option>
-                        {config.options.map((option) => (
-                          <option key={option} value={option}>{option}</option>
-                        ))}
-                      </select>
-                    ) : (
-                      <input
-                        className="input-field"
-                        type={config.field_type === 'number' ? 'number' : 'text'}
-                        value={selectedConfig[config.field_name] || ''}
-                        onChange={(e) => handleConfigChange(config.field_name, e.target.value)}
-                        placeholder={`Enter ${config.field_name}`}
-                      />
-                    )}
-                  </label>
-                ))}
-              </div>
+              <InstrumentOptionFields fields={productConfigurations} values={selectedConfig} onChange={handleConfigChange} />
             </div>
           )}
 

@@ -4,7 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import {
   LayoutDashboard, ShoppingBag, ShoppingCart,
-  Settings, Users, Box, BarChart3, Edit3, X, LogOut, FileText,
+  Settings, Users, Box, BarChart3, Edit3, X, LogOut, FileText, Mail,
 } from 'lucide-react';
 
 const ROLE_BADGE = {
@@ -88,6 +88,12 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
         <NavItem onNavigate={close} to="/customize" icon={Edit3}     label={isAdminRole ? 'Customize' : 'Build a kit'} id="nav-customize" />
         <NavItem onNavigate={close} to="/settings"  icon={Settings}  label="Settings"  id="nav-settings" />
+
+        {!isAdminRole && (
+          <a href="mailto:info@dnftrd.com" className="nav-item">
+            <Mail size={18} className="nav-icon" />info@dnftrd.com
+          </a>
+        )}
 
         {isAdminRole && (
           <>

@@ -225,6 +225,13 @@ const OrderTracking = () => {
             </span>
           </div>
 
+          {order.shipping_carrier && (
+            <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
+              <span style={{ color: 'var(--text-muted)' }}>Shipping courier</span>
+              <strong>{order.shipping_carrier}</strong>
+            </div>
+          )}
+
           {order.items?.[0]?.configuration?.pdf_url && (
             <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--border-color)', paddingBottom: '1rem' }}>
               <span style={{ color: 'var(--text-muted)' }}>Quote Document</span>
